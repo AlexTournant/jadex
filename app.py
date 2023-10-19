@@ -21,7 +21,7 @@ def streetform():
         r = requests.get("https://api-pokemon-fr.vercel.app/api/v1/pokemon/" + pokemon)
         pokemon_info = r.json()
 
-        return render_template('show.html', info=pokemon_info)
+        return render_template('show.html', info=pokemon_info, form=form)
 
     return render_template('form.html', form=form)
 

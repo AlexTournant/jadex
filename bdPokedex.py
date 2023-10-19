@@ -32,6 +32,7 @@ mdp = mot de passe de la personne
 """
 try:
     conn = sqlite3.connect("Pokedex.db")
+    conn.execute('PRAGMA foreign_keys = ON')
     cur = conn.cursor()
     cur.execute("""
     create table Authentification(

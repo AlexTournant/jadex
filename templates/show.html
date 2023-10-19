@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokemon</title>
+</head>
+<body>
+{# On utilise la syntax de Jinja2 pour afficher dans le template ce qu'on à reçu en paramètre  #}
+<h1>nom : {{ info['name']['fr'] }},  id : {{ info['pokedexId'] }}</h1>
+
+<img src="{{ info['sprites']['regular'] }}">
+</body>
+</html>

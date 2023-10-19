@@ -37,7 +37,7 @@ try:
     cur.execute("""
     create table Authentification(
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    nom varchar(15) not null ,
+    nom varchar(15) not null unique ,
     mdp varchar(20) not null
     )
     """)

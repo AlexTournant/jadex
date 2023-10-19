@@ -35,9 +35,11 @@ def insertionTableAuthentification(liste:tuple):
             cur = conn.cursor()
             cur.execute("insert into Authentification(nom, mdp) values (?,?)",liste)
             conn.commit()
+        except IntegrityError:
+            print("le nom a deja ete pris ")
         finally:
             cur.close()
             conn.close()
 
 insertionTableAuthentification(('alex','alex2004'))
-insertionTableCollection((1,3))
+insertionTableCollection((1,1))

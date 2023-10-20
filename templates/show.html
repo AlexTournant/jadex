@@ -42,6 +42,26 @@
     <h5 class="card-title">{{ info['name']['fr'] }}</h5>
     <p class="card-text">PV : {{ info['stats']['hp'] }}<br>Attaque : {{ info['stats']['atk'] }}<br>Défense : {{ info['stats']['def'] }}<br>Attaque spéciale : {{ info['stats']['spe_atk'] }}<br>Défense spéciale: {{ info['stats']['spe_def'] }}<br>Vitesse : {{ info['stats']['vit'] }}<br>  </p>
     </div>
+            <audio id="mySong" src="" controls></audio>
+<script>
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/getFileName/{{ info['pokedexId'] }}', true);
+xhr.send();
+
+xhr.onreadystatechange = function() {
+    if (this.readyState == 4) {
+        var filePath = this.responseText;
+        var audio = document.getElementById('mySong');
+        audio.src = filePath;
+        audio.load();
+        audio.oncanplaythrough = function() {
+            this.play();
+        }
+    }
+}
+
+</script>
+
 </div>
     </div>
     <div class="col">  <img src="{{ info['sprites']['regular'] }}" class="card-img-top" alt="...">

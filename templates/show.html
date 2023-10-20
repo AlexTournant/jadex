@@ -13,8 +13,9 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Accueil</a>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #EE3E3E">
+  <a class="navbar-brand" href="/">
+      <img src="/static/img/jadex-logo.png" width="75" height=""  alt="25"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -40,8 +41,14 @@
         <div class="card md-4 mt-5" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">{{ info['name']['fr'] }}</h5>
+    <h5>type(s) : </h5>
+      <div>
+          {% for type in info['types'] %}
+          <img src="{{ type['image'] }}" style="width: 50px; height: 50px">
+          {% endfor %}
+      </div>
     <p class="card-text">PV : {{ info['stats']['hp'] }}<br>Attaque : {{ info['stats']['atk'] }}<br>Défense : {{ info['stats']['def'] }}<br>Attaque spéciale : {{ info['stats']['spe_atk'] }}<br>Défense spéciale: {{ info['stats']['spe_def'] }}<br>Vitesse : {{ info['stats']['vit'] }}<br>  </p>
-    </div>
+    <p class="card-text">Taille : {{ info['height'] }}<br>Poids : {{ info['weight'] }}</div>
             <audio id="mySong" src="" controls></audio>
 <script>
 var xhr = new XMLHttpRequest();
@@ -64,7 +71,7 @@ xhr.onreadystatechange = function() {
 
 </div>
     </div>
-    <div class="col">  <img src="{{ info['sprites']['regular'] }}" class="card-img-top" alt="...">
+    <div class="col" style="background-image: url('/static/img/pokedex-template.png'); background-repeat: no-repeat; background-size: cover"> <img src="{{ info['sprites']['regular'] }}" class="card-img-top" alt="...">
 </div>
 
 </div>

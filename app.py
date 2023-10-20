@@ -3,6 +3,7 @@ import requests
 from flask_wtf import *
 from wtforms import *
 from wtforms.validators import DataRequired
+from unidecode import unidecode
 
 app = Flask(__name__)
 app.secret_key = 'Ma clé secrète'
@@ -21,9 +22,19 @@ def streetform():
         r = requests.get("https://api-pokemon-fr.vercel.app/api/v1/pokemon/" + pokemon)
         pokemon_info = r.json()
 
-        return render_template('show.html', info=pokemon_info)
+        return render_template('show.html', info=pokemon_info, form=form)
 
     return render_template('form.html', form=form)
+
+@app.route('/getFileName/<id>')
+def getFileName(id):
+    print(id)
+    r = requests.get("https://api-pokemon-fr.vercel.app/api/v1/pokemon/" + id)
+    pokemon_info = r.json()
+    son = "static/gen"+str(pokemon_info['generation'])+"/"+id+ " - "+unidecode(pokemon_info['name']['fr'].lower())+".ogg"
+    print(son)
+    return son
+
 
 
 if __name__ == '__main__':

@@ -1,6 +1,10 @@
 import sqlite3
 from sqlite3 import IntegrityError
 import hashlib
+
+from numpy.core.defchararray import lower
+
+
 def insertionTableCollection(liste:tuple):
     insert = True
     if not len(liste) == 2:
@@ -35,11 +39,20 @@ def insertionTableAuthentification(liste:tuple):
             cur = conn.cursor()
             cur.execute("insert into Authentification(nom, mdp) values (?,?)",liste)
             conn.commit()
-        except IntegrityError:
-            print("le nom a deja ete pris ")
+            return True
+        except IntegrityError as e:
+            if lower(e.args[0].split()[0])== "check":
+                if str(e.args[0].split(":")[1].split(">")[0]).strip() == "nom":
+                     print("le nom n'est pas assez grand ")
+                elif str(e.args[0].split(":")[1].split(">")[0]).strip() == "mdp":
+                    print("mdp n'est pas assez grand")
+            else:
+                print("le nom a deja ete pris")
+            return False
         finally:
             cur.close()
             conn.close()
 
-insertionTableAuthentification(('alex','alex2004'))
-insertionTableCollection((1,1))
+insertionTableAuthentification(("mlkjhg","mljkhgfd"))
+for i in range (100):
+    insertionTableCollection((i,1))

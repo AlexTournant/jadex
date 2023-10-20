@@ -53,6 +53,3 @@ def insertionTableAuthentification(liste:tuple):
             cur.close()
             conn.close()
 
-insertionTableAuthentification(("mlkjhg","mljkhgfd"))
-for i in range (100):
-    insertionTableCollection((i,1))

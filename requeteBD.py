@@ -120,5 +120,3 @@ def CollectionAll(id:int)->list:
     finally:
         cur.close()
         conn.close()
-
-print(CollectionAll(1))

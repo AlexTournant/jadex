@@ -1,9 +1,22 @@
+import base64
 import sqlite3
 from sqlite3 import IntegrityError
-import hashlib
 
 from numpy.core.defchararray import lower
 
+sample_string = "GeeksForGeeks is the best"
+sample_string_bytes = sample_string.encode("ascii")
+
+base64_bytes = base64.b64encode(sample_string_bytes)
+base64_string = base64_bytes.decode("ascii")
+
+print(base64_string)
+base64_string = " R2Vla3NGb3JHZWVrcyBpcyB0aGUgYmVzdA =="
+base64_bytes = base64_string.encode("ascii")
+
+sample_string_bytes = base64.b64decode(base64_bytes)
+sample_string = sample_string_bytes.decode("ascii")
+print(sample_string)
 
 def insertionTableCollection(liste:tuple):
     insert = True
@@ -30,6 +43,13 @@ def insertionTableAuthentification(liste:tuple):
     insert=True
     if not len(liste)==2:
         insert=False
+    if len(liste)==2:
+        sample_string = liste[1]
+        sample_string_bytes = sample_string.encode("ascii")
+        base64_bytes = base64.b64encode(sample_string_bytes)
+        newMdp = base64_bytes.decode("ascii")
+        new_tuple =(liste[0],newMdp)
+
     if insert:
         """
         insertion des valeur dans l'authentification tout en faisant attention a l'injection
@@ -37,7 +57,7 @@ def insertionTableAuthentification(liste:tuple):
         try:
             conn = sqlite3.connect("Pokedex.db")
             cur = conn.cursor()
-            cur.execute("insert into Authentification(nom, mdp) values (?,?)",liste)
+            cur.execute("insert into Authentification(nom, mdp) values (?,?)",new_tuple)
             conn.commit()
             return True
         except IntegrityError as e:
@@ -47,9 +67,10 @@ def insertionTableAuthentification(liste:tuple):
                 elif str(e.args[0].split(":")[1].split(">")[0]).strip() == "mdp":
                     print("mdp n'est pas assez grand")
             else:
-                print("le nom a deja ete pris")
+                print("le nom ou le mot de passe a deja ete pris")
             return False
         finally:
             cur.close()
             conn.close()
 
+insertionTableCollection((1,1))

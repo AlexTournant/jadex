@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" href="/static/img/ja-icon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+
+    <title>JA-Dex - Accueil</title>
+  </head>
+  <body style="background-image:url('../static/img/wallpaper_.png');height: 100vh;backdrop-filter: blur(5px);">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #EE3E3E">
+    <a class="navbar-brand" href="/">
+        <img src="/static/img/jadex-logo.png" width="75" height="" alt="25">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {% if est_connecte %}
+            <li class="nav-item active">
+                <a class="nav-link" href="/collection" style="margin-left: 2rem;color: white;font-size: larger; font-weight: bold">Collections <span class="sr-only">(current)</span></a>
+            </li>
+            {% endif %}
+        </ul>
+        <form method="POST" action="/" class="form-inline my-2 my-lg-0">
+        {{ form.csrf_token }}
+        <input type="text" id="autocomplete" name="pokemon" class="form-control mr-sm-2" list="list-pokemon">
+        <datalist id="list-pokemon">
+            {% for pokemon_name in pokemon_names %}
+                <option value="{{ pokemon_name }}">
+            {% endfor %}
+        </datalist>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+        </form>
+        {% if est_connecte %}
+            <div>
+            <a  href="/logout">Logout</a>
+            <p>{{ nom }}</p>
+            </div>
+        {% else %}
+            <div>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        </div>
+        {% endif %}
+    </div>
+</nav>
+  <div class="d-flex flex-column" style="background-color: white;width: fit-content;position:absolute;top: 50%;left: 50%;transform: translate(-50%,-50%)">
+    <h2>Register</h2>
+    <form method="POST" action="/register">
+        <div>
+        {{ formulaire.csrf_token }}
+        <label>Nom</label>
+        {{ formulaire.nom() }}
+        </div>
+        <div>
+        <label>Mot de Passe</label>
+        {{ formulaire.mdp() }}
+        </div>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Valider</button>
+    </form>
+  </div>
+</body>
+</html>

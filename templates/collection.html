@@ -8,7 +8,7 @@
     <link rel="icon" href="/static/img/ja-icon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
-
+      <link rel="stylesheet" href="/static/css/app.css">
     <title>JA-Dex - Accueil</title>
   </head>
   <body style="background-image:url('../static/img/wallpaper_.png')">
@@ -52,27 +52,25 @@
 </nav>
   <div class="album py-5 bg-body-tertiary">
   <div class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
+    <div class="collection">
         {% for item in collection %}
-        <div class="col" xmlns="http://www.w3.org/1999/html">
-          <div class="card shadow-sm">
-              <img src="{{ item.pokemon['sprites']['regular'] }}">
-              <div class="card-body">
-              <p class="card-text">{{item.pokemon['name']['fr']}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/{{ item.id }}">View</a></button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/suppCollection/{{ item.id }}">Supprimer</a></button>
+        <div class="pokemon">
+            <div>
+                <div class="image-container">
+                    <img src="/static/img/background-forest.png" style="position: absolute">
+                    <img src="{{ item.pokemon['sprites']['regular'] }}">
                 </div>
-                <small class="text-body-secondary">9 mins</small>
-              </div>
+                <p>{{ item.pokemon['name']['fr'] }}</p>
+                <div>
+                    <a href="/{{ item.id }}">🔍</a>
+                    <a href="/suppCollection/{{ item.id }}">🗑️</a>
+                </div>
             </div>
-          </div>
         </div>
         {% endfor %}
-      </div>
-  </div>
+    </div>
+    </div>
+
   </div>
 </body>
 </html>

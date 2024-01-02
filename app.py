@@ -170,7 +170,7 @@ def ajoutCollection(id_pokemon):
         if insertionTableCollection((id_pokemon, id)):
             message = "Bien ajouter"
     print(message)
-    return redirect('/')
+    return redirect('/collection')
 
 
 @app.route('/suppCollection/<id_pokemon>', methods=['GET'])
@@ -180,7 +180,7 @@ def suppCollection(id_pokemon):
         if suppPokemon(id_pokemon, id):
             message = "Bien supprimer"
     print(message)
-    return redirect('/')
+    return redirect('/collection')
 
 
 if __name__ == '__main__':

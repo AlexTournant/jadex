@@ -62,15 +62,6 @@ def getFileName(id):
     print(son)
     return son
 
-
-def load_pokemon_names():
-    r = requests.get("https://api-pokemon-fr.vercel.app/api/v1/pokemon")
-    if r.status_code == 200:
-        pokemon_data = r.json()
-        names = [pkm['name']['fr'] for pkm in pokemon_data]
-    return names
-
-
 def get_pokemon_id_by_name(name):
     r = requests.get("https://api-pokemon-fr.vercel.app/api/v1/pokemon")
     if r.status_code == 200:

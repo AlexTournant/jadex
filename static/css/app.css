@@ -48,7 +48,7 @@
     align-items: center;
 }
 
-.pokemon > div > div > a, .pokemon > div > div > form > button{
+.pokemon > div > div > a, .pokemon > div > div > form > button {
     text-decoration: none;
     padding: 8px 12px;
     color: #333;
@@ -56,4 +56,26 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     margin: 5px
+}
+
+.logs {
+    display: flex;
+    flex-direction: row;
+    margin-left: 15px;
+}
+
+.logs > a {
+    padding: 8px ;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: yellow;
+    margin: 0 5px;
+}
+
+.logs > p {
+    padding: 8px ;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: blue;
+    margin: 0 5px;
 }

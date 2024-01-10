@@ -21,12 +21,22 @@ id = None
 # DB
 init_db()
 
+# AUTOCOMPLETION
+
+def load_pokemon_names():
+    r = requests.get("https://api-pokemon-fr.vercel.app/api/v1/pokemon")
+    if r.status_code == 200:
+        pokemon_data = r.json()
+        names = [pkm['name']['fr'] for pkm in pokemon_data]
+    return names
+
+pokemon_names = load_pokemon_names()
+
 
 @app.route('/', methods=['GET', 'POST'])
 def streetform():
     global est_connecte
     form = PokemonForm()
-    pokemon_names = load_pokemon_names()
     if form.validate_on_submit():
         pokemon_name = form.pokemon.data
         pokemon_id = get_pokemon_id_by_name(pokemon_name)
@@ -75,7 +85,6 @@ def get_pokemon_id_by_name(name):
 def login():
     global est_connecte, id, nom
     form = PokemonForm()
-    pokemon_names = load_pokemon_names()
     if form.validate_on_submit():
         pokemon_name = form.pokemon.data
         pokemon_id = get_pokemon_id_by_name(pokemon_name)
@@ -105,7 +114,6 @@ def login():
 def register():
     global est_connecte, nom, id
     form = PokemonForm()
-    pokemon_names = load_pokemon_names()
     if form.validate_on_submit():
         pokemon_name = form.pokemon.data
         pokemon_id = get_pokemon_id_by_name(pokemon_name)
@@ -141,7 +149,6 @@ def logout():
 @app.route('/collection', methods=['GET'])
 def collection():
     form = PokemonForm()
-    pokemon_names = load_pokemon_names()
     if form.validate_on_submit():
         pokemon_name = form.pokemon.data
         pokemon_id = get_pokemon_id_by_name(pokemon_name)

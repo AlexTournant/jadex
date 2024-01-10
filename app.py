@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 import requests
 from unidecode import unidecode
 
@@ -36,6 +36,7 @@ pokemon_names = load_pokemon_names()
 @app.route('/', methods=['GET', 'POST'])
 def streetform():
     global est_connecte
+    pokemon_id = None
     form = PokemonForm()
     if form.validate_on_submit():
         pokemon_name = form.pokemon.data
@@ -49,8 +50,18 @@ def streetform():
                 inCollection = isInCollection(pokemon_id, id)
             return render_template('show.html', info=pokemon_info, form=form, pokemon_names=pokemon_names, nom=nom,
                                    est_connecte=est_connecte, inCollection=inCollection, id_pokemon=pokemon_id)
-    return render_template('form.html', form=form, pokemon_names=pokemon_names, nom=nom, est_connecte=est_connecte)
+    pokemon_id = request.args.get('pokemon_id')
+    if pokemon_id:
+        print(pokemon_id)
+        r = requests.get(f"https://api-pokemon-fr.vercel.app/api/v1/pokemon/" + str(pokemon_id))
+        pokemon_info = r.json()
+        inCollection = False
+        if est_connecte:
+            inCollection = isInCollection(pokemon_id, id)
+        return render_template('show.html', info=pokemon_info, form=form, pokemon_names=pokemon_names, nom=nom,
+                               est_connecte=est_connecte, inCollection=inCollection, id_pokemon=pokemon_id)
 
+    return render_template('form.html', form=form, pokemon_names=pokemon_names, nom=nom, est_connecte=est_connecte)
 
 @app.route('/getFileName/<id>')
 def getFileName(id):
@@ -69,6 +80,7 @@ def get_pokemon_id_by_name(name):
         for pkm in pokemon_data:
             if (pkm['name']['fr']) == (name):
                 return pkm.get('pokedexId')
+    print('err', name)
     return -1
 
 

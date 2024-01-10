@@ -48,7 +48,7 @@
     align-items: center;
 }
 
-.pokemon > div > div > a {
+.pokemon > div > div > a, .pokemon > div > div > form > button{
     text-decoration: none;
     padding: 8px 12px;
     color: #333;

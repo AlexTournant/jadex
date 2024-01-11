@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap');
+* {
+    font-family: 'Anonymous Pro', sans-serif;
+}
+
+
 .collection {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -5,7 +11,7 @@
 }
 
 .pokemon {
-    background-color: #EE3E3E;
+    background-color: #fe0065;
     border: 3px solid black;
     border-radius: 8px;
     overflow: hidden;
@@ -52,10 +58,14 @@
     text-decoration: none;
     padding: 8px 12px;
     color: #333;
-    background-color: yellow;
-    border: 1px solid #ccc;
+    background-color: #ffcb05;
+    border: 2px solid #2a75bb;
     border-radius: 4px;
     margin: 5px
+}
+
+#nomPoke{
+    color: white;
 }
 
 .logs {
@@ -65,17 +75,17 @@
 }
 
 .logs > a {
-    padding: 8px ;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: yellow;
+    padding: 6px ;
+    border: 2px solid #2a75bb;
+    border-radius: 8px;
+    background-color: #ffcb05;
     margin: 0 5px;
+    text-decoration: none;
 }
 
 .logs > p {
-    padding: 8px ;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: blue;
-    margin: 0 5px;
+    color: white;
+    font-weight: bold;
+    margin: 0.5rem;
 }
+

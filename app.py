@@ -1,3 +1,5 @@
+import os.path
+
 from flask import Flask, render_template, redirect, request
 import requests
 from unidecode import unidecode
@@ -70,6 +72,9 @@ def getFileName(id):
     pokemon_info = r.json()
     son = "static/gen" + str(pokemon_info['generation']) + "/" + id + " - " + unidecode(
         pokemon_info['name']['fr'].lower()) + ".ogg"
+    exist = os.path.exists(son)
+    if not exist:
+        son = "none"
     print(son)
     return son
 
@@ -81,7 +86,7 @@ def get_pokemon_id_by_name(name):
             if (pkm['name']['fr']) == (name):
                 return pkm.get('pokedexId')
     print('err', name)
-    return -1
+    return 0
 
 
 @app.route('/login', methods=['GET', 'POST'])

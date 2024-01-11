@@ -77,25 +77,41 @@
         {% endif %}
     </p>
     <p class="card-text">Taille: {{ info['height'] if info['height'] else 'Non disponible' }}<br>Poids: {{ info['weight'] if info['weight'] else 'Non disponible' }}</p>
-    <audio id="mySong" src="" controls style="width: 75%"></audio>
-                    <script>
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', '/getFileName/{{ info['pokedexId'] }}', true);
-                        xhr.send();
+<script id="myScript">
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/getFileName/{{ info['pokedexId'] }}', true);
+    xhr.send();
 
-                        xhr.onreadystatechange = function() {
-                            if (this.readyState == 4) {
-                                var filePath = this.responseText;
-                                var audio = document.getElementById('mySong');
-                                audio.src = filePath;
-                                audio.load();
-                                audio.oncanplaythrough = function() {
-                                    this.play();
-                                }
-                            }
-                        }
-                    </script>
-                {% if est_connecte %}
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4) {
+            var filePath = this.responseText;
+
+            if (filePath !== "none") {
+                // Création de l'élément audio
+                var audio = document.createElement("audio");
+                audio.id = 'mySong';
+                audio.src = filePath;
+                audio.controls = true;
+                audio.style.width = '75%';
+
+                // Récupération du parent de l'élément script
+                var parent = document.getElementById('myScript').parentNode;
+
+                // Insertion de l'élément audio avant l'élément script
+                parent.insertBefore(audio, document.getElementById('myScript'));
+
+                audio.load();
+                audio.oncanplaythrough = function() {
+                    this.play();
+                }
+            }
+        }
+    }
+</script>
+
+
+
+                    {% if est_connecte %}
                     {% if inCollection %}
                         <button><a href="/suppCollection/{{ id_pokemon }}">Supprimer de votre Collection</a></button>
                     {% else %}
@@ -131,8 +147,6 @@
 }
 
 </style>
-
-
 {#Scripts#}
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -29,16 +29,6 @@
             </li>
             {% endif %}
         </ul>
-        <form method="POST" action="/" class="form-inline my-2 my-lg-0">
-        {{ form.csrf_token }}
-        <input type="text" id="autocomplete" name="pokemon" class="form-control mr-sm-2" list="list-pokemon">
-        <datalist id="list-pokemon">
-            {% for pokemon_name in pokemon_names %}
-                <option value="{{ pokemon_name }}">
-            {% endfor %}
-        </datalist>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-        </form>
         {% if est_connecte %}
             <div class="logs">
             <a  href="/logout">Logout</a>
@@ -52,21 +42,23 @@
         {% endif %}
     </div>
 </nav>
-  <div class="d-flex flex-column" style="background-color: white;width: fit-content;position:absolute;top: 50%;left: 50%;transform: translate(-50%,-50%)">
-    <h2>Login</h2>
-    <h2>{{ message }}</h2>
+  <div class="d-flex flex-column" style="background-color: white; width: fit-content; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h2 style="margin-bottom: 1rem;">Se connecter</h2>
     <form method="POST" action="/login" class="d-flex flex-column">
         {{ formulaire.csrf_token }}
-        <div>
-        <label>Nom</label>
-        {{ formulaire.nom() }}
+        <div class="form-group" style="margin-bottom: 1rem;">
+            <label>Nom</label>
+            {{ formulaire.nom(class="form-control") }}
         </div>
-        <div>
-        <label>Mot de Passe</label>
-        {{ formulaire.mdp() }}
+        <div class="form-group" style="margin-bottom: 1rem;">
+            <label>Mot de Passe</label>
+            {{ formulaire.mdp(type="password", class="form-control") }}
         </div>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Valider</button>
+        <div class="text-center" style="margin-bottom: 1rem">
+            <a href="/register">S'enregistrer</a>
+        </div>
+        <button class="btn btn-outline-success" type="submit">Valider</button>
     </form>
-  </div>
+</div>
 </body>
 </html>

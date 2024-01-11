@@ -7,7 +7,7 @@
 
     <link rel="icon" href="/static/img/ja-icon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-          <link rel="stylesheet" href="/static/css/app.css">
+    <link rel="stylesheet" href="/static/css/app.css">
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
 
@@ -29,16 +29,6 @@
             </li>
             {% endif %}
         </ul>
-        <form method="POST" action="/" class="form-inline my-2 my-lg-0">
-        {{ form.csrf_token }}
-        <input type="text" id="autocomplete" name="pokemon" class="form-control mr-sm-2" list="list-pokemon">
-        <datalist id="list-pokemon">
-            {% for pokemon_name in pokemon_names %}
-                <option value="{{ pokemon_name }}">
-            {% endfor %}
-        </datalist>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-        </form>
         {% if est_connecte %}
             <div  class="logs">
             <a  href="/logout">Logout</a>
@@ -60,7 +50,11 @@
             {{ form.csrf_token }}
           <div class="form-group">
             <input type="text" id="autocomplete" name="pokemon" class="form-control mr-sm-2" list="list-pokemon" required>
-            <datalist id="list-pokemon"></datalist>
+            <datalist id="list-pokemon">
+            {% for pokemon_name in pokemon_names %}
+                <option value="{{ pokemon_name }}">
+            {% endfor %}
+        </datalist>
           </div>
           <div style="margin-top: 2rem">
             <button class="btn btn-danger my-2 my-sm-0" type="submit"> Rechercher</button>
@@ -68,14 +62,6 @@
       </form>
   </div>
 
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap');
-* {
-    font-family: 'Anonymous Pro', sans-serif;
-}
-
-</style>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

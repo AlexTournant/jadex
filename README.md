@@ -19,6 +19,17 @@ La page d'informations est la suite logique de la page d'accueil et fournit des 
   - défense spéciale
   - taille (en mètres)
   - poids (en kilogrammes)
-  - cri.
+  - cri
 
 La page de collection permet aux utilisateurs de stocker et de marquer en favoris plusieurs Pokémon qu'ils ont sélectionnés. Pour cela, l'utilisateur doit être connecté.
+
+### Quelques ilustrations :
+
+![image.png](./static/img/jadex(1).png)
+(Page d'accueil)
+
+![image.png](./static/img/jadex(3).png)
+(Page de la collection d'un utilisateur)
+
+![image.png](./static/img/jadex(2).png)
+(Page d'un pokemon)
